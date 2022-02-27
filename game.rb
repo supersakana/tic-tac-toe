@@ -1,23 +1,26 @@
 # ruby game.rb
-class GameBoard
-  attr_accessor :board
-
-  def initialize
-    @board = {
-      a: %w[A1 A2 A3],
-      b: %w[B1 B2 B3],
-      c: %w[C1 C2 C3]
-    }
-  end
-
+module GameFunctions
   def printer
-    @board.each do |_key, value|
+    $board.each do |_key, value|
       p value
     end
   end
 end
 
+class GameBoard
+  include GameFunctions
+
+  def initialize
+    $board = {
+      a: %w[A1 A2 A3],
+      b: %w[B1 B2 B3],
+      c: %w[C1 C2 C3]
+    }
+  end
+end
+
 class Player
+  include GameFunctions
   attr_accessor :name, :move
 
   @@player_count = 0
@@ -37,7 +40,12 @@ class Player
   end
 
   def choice(choice)
-    puts choice
+    # puts choice
+    # puts move
+
+    $board.each do |key, _value|
+      board[key] = move if $board[key] == choice
+    end
   end
 end
 
@@ -51,8 +59,9 @@ puts 'Player 2, what is your name?'
 player_2 = Player.new(gets.chomp, 'O')
 puts "Welcome #{player_2.name}, your move is #{player_2.move}"
 
-# player_1.move_message
-# player_1.choice(gets.chomp.upcase)
-
 new_game = GameBoard.new
 new_game.printer
+
+player_1.move_message
+player_1.choice(gets.chomp.upcase)
+# new_game.printer
