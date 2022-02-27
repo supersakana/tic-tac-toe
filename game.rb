@@ -34,30 +34,19 @@ puts 'Player 2, what is your name?'
 player_2 = Player.new(gets.chomp, 'O')
 puts "Welcome #{player_2.name}, your move is #{player_2.move}"
 
-board = {
+game_board = {
   a: %w[A1 A2 A3],
   b: %w[B1 B2 B3],
   c: %w[C1 C2 C3]
 }
 
-def printer
+def printer(board)
   board.each do |_key, value|
     p value
   end
 end
-printer
 
-# A = %w[A1 A2 A3]
-# B = %w[B1 B2 B3]
-# C = %w[C1 C2 C3]
-
-# def printer
-#   p A
-#   p B
-#   p C
-# end
-
-# printer
+printer(game_board)
 
 # player_1.move_message
 # player_1.choice(gets.chomp.upcase)
