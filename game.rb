@@ -1,4 +1,22 @@
 # ruby game.rb
+class GameBoard
+  attr_accessor :board
+
+  def initialize
+    @board = {
+      a: %w[A1 A2 A3],
+      b: %w[B1 B2 B3],
+      c: %w[C1 C2 C3]
+    }
+  end
+
+  def printer
+    @board.each do |_key, value|
+      p value
+    end
+  end
+end
+
 class Player
   attr_accessor :name, :move
 
@@ -19,8 +37,7 @@ class Player
   end
 
   def choice(choice)
-    p choice.split('')
-    p choice[0]
+    puts choice
   end
 end
 
@@ -34,19 +51,8 @@ puts 'Player 2, what is your name?'
 player_2 = Player.new(gets.chomp, 'O')
 puts "Welcome #{player_2.name}, your move is #{player_2.move}"
 
-game_board = {
-  a: %w[A1 A2 A3],
-  b: %w[B1 B2 B3],
-  c: %w[C1 C2 C3]
-}
-
-def printer(board)
-  board.each do |_key, value|
-    p value
-  end
-end
-
-printer(game_board)
-
 # player_1.move_message
 # player_1.choice(gets.chomp.upcase)
+
+new_game = GameBoard.new
+new_game.printer
