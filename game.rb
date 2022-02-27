@@ -12,9 +12,10 @@ class Player
     puts "#{name}, make your move..."
   end
 
-  def choice(choice)
-    puts choice
-    puts move
+  def choice(_choice, board)
+    board.each do |k, v|
+      puts "#{k} = #{v}"
+    end
   end
 end
 
@@ -28,18 +29,18 @@ puts 'Player 2, what is your name?'
 player_2 = Player.new(gets.chomp, 'O')
 puts "Welcome #{player_2.name}, your move is #{player_2.move}"
 
-board = {
-  a: %w[1 2 3],
-  b: %w[4 5 6],
-  c: %w[7 8 9]
+game_board = {
+  a: [1, 2, 3],
+  b: [4, 5, 6],
+  c: [7, 8, 9]
 }
 
-def printer(game_board)
-  game_board.each do |_key, value|
+def printer(board)
+  board.each do |_key, value|
     p value
   end
 end
 
-printer(board)
+printer(game_board)
 player_1.move_message
-player_1.choice(gets.chomp.upcase)
+player_1.choice(gets.chomp.to_s, game_board)
