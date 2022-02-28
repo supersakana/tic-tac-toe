@@ -1,6 +1,4 @@
-# ruby game.rb
-
-# for when each player is created
+# When a player is created
 class Player
   attr_accessor :name, :move
 
@@ -19,8 +17,15 @@ class Player
     end
     printer(board)
   end
+
+  def row_checker(board)
+    board.each do |_k, v|
+      puts 'winner!' if v == %w[X X X]
+    end
+  end
 end
 
+# Game Introduction
 puts 'Hello and welcome to tic-tac-toe!'
 
 puts 'Player 1, what is your name?'
@@ -38,19 +43,22 @@ game_board = {
 }
 
 def printer(board)
-  board.each do |_key, value|
-    p value
+  board.each do |_k, v|
+    p v
   end
 end
 printer(game_board)
 
 i = 0
-while i < 10
+while i < 9
   player_1.move_message
   player_1.choice(gets.chomp.to_s, game_board)
+  player_1.row_checker(game_board)
+  i += 1
 
   player_2.move_message
   player_2.choice(gets.chomp.to_s, game_board)
-
   i += 1
 end
+
+puts 'tie'
