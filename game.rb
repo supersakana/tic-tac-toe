@@ -1,5 +1,6 @@
 # ruby game.rb
 
+# for when each player is created
 class Player
   attr_accessor :name, :move
 
@@ -41,7 +42,15 @@ def printer(board)
     p value
   end
 end
-
 printer(game_board)
-player_1.move_message
-player_1.choice(gets.chomp.to_s, game_board)
+
+i = 0
+while i < 10
+  player_1.move_message
+  player_1.choice(gets.chomp.to_s, game_board)
+
+  player_2.move_message
+  player_2.choice(gets.chomp.to_s, game_board)
+
+  i += 1
+end
