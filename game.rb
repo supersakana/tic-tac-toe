@@ -12,10 +12,11 @@ class Player
     puts "#{name}, make your move..."
   end
 
-  def choice(_choice, board)
-    board.each do |k, v|
-      puts "#{k} = #{v}"
+  def choice(choice, board)
+    board.each do |_k, v|
+      v[v.index(choice)] = move if v.include?(choice)
     end
+    printer(board)
   end
 end
 
@@ -30,9 +31,9 @@ player_2 = Player.new(gets.chomp, 'O')
 puts "Welcome #{player_2.name}, your move is #{player_2.move}"
 
 game_board = {
-  a: [1, 2, 3],
-  b: [4, 5, 6],
-  c: [7, 8, 9]
+  a: %w[1 2 3],
+  b: %w[4 5 6],
+  c: %w[7 8 9]
 }
 
 def printer(board)
