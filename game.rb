@@ -38,9 +38,9 @@ class Player
       second_column.push(v[1])
       third_column.push(v[2])
     end
-    if (first_column.all? { |i| (i == 'X') || (i == 'O') }) ||
-       (second_column.all? { |i| (i == 'X') || (i == 'O') }) ||
-       (third_column.all? { |i| (i == 'X') || (i == 'O') })
+    if (first_column.all? { |i| i == move }) ||
+       (second_column.all? { |i| i == move }) ||
+       (third_column.all? { |i| i == move })
       @winner = true
       puts "#{name} is the Winner!"
     end
@@ -69,8 +69,7 @@ def printer(board)
     p v
   end
 end
-# printer(game_board)
-player_one.column_checker(game_board)
+printer(game_board)
 
 i = 0
 while i < 9
