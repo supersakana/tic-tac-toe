@@ -1,10 +1,11 @@
 # When a player is created
 class Player
-  attr_accessor :name, :move
+  attr_accessor :name, :move, :winner
 
   def initialize(name, move)
     @name = name
     @move = move
+    @winner = false
   end
 
   def move_message
@@ -20,7 +21,10 @@ class Player
 
   def row_checker(board)
     board.each do |_k, v|
-      puts 'winner!' if v == %w[X X X]
+      if (v == %w[X X X]) || (v == %w[O O O])
+        @winner = true
+        puts "#{name} is the Winner!"
+      end
     end
   end
 
@@ -54,17 +58,20 @@ def printer(board)
   end
 end
 printer(game_board)
-player_1.column_checker(game_board)
 
 i = 0
 while i < 9
   player_1.move_message
   player_1.choice(gets.chomp.to_s, game_board)
   player_1.row_checker(game_board)
+  break if player_1.winner == true
+
   i += 1
 
   player_2.move_message
   player_2.choice(gets.chomp.to_s, game_board)
+  player_2.row_checker(game_board)
+  break if player_2.winner == true
+
   i += 1
 end
-puts 'tie'
