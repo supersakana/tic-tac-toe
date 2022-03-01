@@ -1,4 +1,4 @@
-# When a player is created
+#  When a player is created
 class Player
   attr_accessor :name, :move, :winner
 
@@ -39,12 +39,12 @@ end
 puts 'Hello and welcome to tic-tac-toe!'
 
 puts 'Player 1, what is your name?'
-player_1 = Player.new(gets.chomp, 'X')
-puts "Welcome #{player_1.name}, your move is #{player_1.move}"
+player_one = Player.new(gets.chomp, 'X')
+puts "Welcome #{player_one.name}, your move is #{player_one.move}"
 
 puts 'Player 2, what is your name?'
-player_2 = Player.new(gets.chomp, 'O')
-puts "Welcome #{player_2.name}, your move is #{player_2.move}"
+player_two = Player.new(gets.chomp, 'O')
+puts "Welcome #{player_two.name}, your move is #{player_two.move}"
 
 game_board = {
   a: %w[1 2 3],
@@ -61,17 +61,17 @@ printer(game_board)
 
 i = 0
 while i < 9
-  player_1.move_message
-  player_1.choice(gets.chomp.to_s, game_board)
-  player_1.row_checker(game_board)
-  break if player_1.winner == true
+  player_one.move_message
+  player_one.choice(gets.chomp.to_s, game_board)
+  player_one.row_checker(game_board)
+  break if player_one.winner == true
 
   i += 1
 
-  player_2.move_message
-  player_2.choice(gets.chomp.to_s, game_board)
-  player_2.row_checker(game_board)
-  break if player_2.winner == true
+  player_two.move_message
+  player_two.choice(gets.chomp.to_s, game_board)
+  player_two.row_checker(game_board)
+  break if player_two.winner == true
 
   i += 1
 end
