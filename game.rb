@@ -21,7 +21,7 @@ class Player
 
   def row_checker(board)
     board.each do |_k, v|
-      if (v == %w[X X X]) || (v == %w[O O O])
+      if v.all? { |i| i == move }
         @winner = true
         puts "#{name} is the Winner!"
       end
