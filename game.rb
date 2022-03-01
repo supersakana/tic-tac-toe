@@ -23,6 +23,12 @@ class Player
       puts 'winner!' if v == %w[X X X]
     end
   end
+
+  def column_checker(board)
+    board.each do |_k, v|
+      p v[0]
+    end
+  end
 end
 
 # Game Introduction
@@ -48,6 +54,7 @@ def printer(board)
   end
 end
 printer(game_board)
+player_1.column_checker(game_board)
 
 i = 0
 while i < 9
@@ -60,5 +67,4 @@ while i < 9
   player_2.choice(gets.chomp.to_s, game_board)
   i += 1
 end
-
 puts 'tie'
