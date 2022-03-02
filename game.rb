@@ -118,10 +118,10 @@ while (player_one.winner == false) || (player_two.winner == false)
   player_one.move_message
   player_one.choice(gets.chomp.to_s, game_board)
   player_one.checker(game_board)
-  break if player_one.tie == true
+  break if (player_one.tie == true) || (player_one.winner == true)
 
   player_two.move_message
   player_two.choice(gets.chomp.to_s, game_board)
   player_two.checker(game_board)
-  break if player_two.tie == true
+  break if (player_two.tie == true) || (player_two.winner == true)
 end
