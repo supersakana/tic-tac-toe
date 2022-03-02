@@ -1,6 +1,7 @@
 #  When a player is created
 class Player
-  attr_accessor :name, :move, :winner
+  attr_accessor :name
+  attr_reader :winner, :move
 
   def initialize(name, move)
     @name = name
@@ -65,6 +66,12 @@ class Player
       puts "#{name} is the Winner!"
     end
   end
+
+  def checker(board)
+    diagonal_checker(board)
+    row_checker(board)
+    column_checker(board)
+  end
 end
 
 # Game Introduction
@@ -89,26 +96,14 @@ def printer(board)
     p v
   end
 end
-# printer(game_board)
-player_one.diagonal_checker(game_board)
+printer(game_board)
 
-i = 0
-while i < 9
+while (player_one.winner == false) || (player_two.winner = false)
   player_one.move_message
   player_one.choice(gets.chomp.to_s, game_board)
-  player_one.row_checker(game_board)
-  player_one.column_checker(game_board)
-  player_one.diagonal_checker(game_board)
-  break if player_one.winner == true
-
-  i += 1
+  player_one.checker(game_board)
 
   player_two.move_message
   player_two.choice(gets.chomp.to_s, game_board)
-  player_two.row_checker(game_board)
-  player_two.column_checker(game_board)
-  player_two.diagonal_checker(game_board)
-  break if player_two.winner == true
-
-  i += 1
+  player_two.checker(game_board)
 end
