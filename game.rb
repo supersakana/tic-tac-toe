@@ -1,12 +1,13 @@
 #  When a player is created
 class Player
   attr_accessor :name
-  attr_reader :winner, :move
+  attr_reader :winner, :move, :tie
 
   def initialize(name, move)
     @name = name
     @move = move
     @winner = false
+    @tie = false
   end
 
   def move_message
@@ -26,6 +27,19 @@ class Player
         @winner = true
         puts "#{name} is the Winner!"
       end
+    end
+  end
+
+  def tie_checker(board)
+    full_board = []
+    board.each do |_k, v|
+      v.each do |i|
+        full_board.push(i)
+      end
+    end
+    if full_board.all? { |i| %w[X O].include?(i) }
+      @tie = true
+      p "It's a tie!"
     end
   end
 
@@ -71,6 +85,7 @@ class Player
     diagonal_checker(board)
     row_checker(board)
     column_checker(board)
+    tie_checker(board)
   end
 end
 
@@ -98,12 +113,15 @@ def printer(board)
 end
 printer(game_board)
 
-while (player_one.winner == false) || (player_two.winner = false)
+while (player_one.winner == false) || (player_two.winner == false)
+
   player_one.move_message
   player_one.choice(gets.chomp.to_s, game_board)
   player_one.checker(game_board)
+  break if player_one.tie == true
 
   player_two.move_message
   player_two.choice(gets.chomp.to_s, game_board)
   player_two.checker(game_board)
+  break if player_two.tie == true
 end
