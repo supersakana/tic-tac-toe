@@ -45,6 +45,26 @@ class Player
       puts "#{name} is the Winner!"
     end
   end
+
+  def diagonal_checker(board)
+    first_diag = []
+    second_diag = []
+
+    board.each do |k, v|
+      first_diag.push(v[0]) if k == :a
+      first_diag.push(v[1]) if k == :b
+      first_diag.push(v[2]) if k == :c
+
+      second_diag.push(v[2]) if k == :a
+      second_diag.push(v[1]) if k == :b
+      second_diag.push(v[0]) if k == :c
+    end
+    if (first_diag.all? { |i| i == move }) ||
+       (second_diag.all? { |i| i == move })
+      @winner = true
+      puts "#{name} is the Winner!"
+    end
+  end
 end
 
 # Game Introduction
@@ -69,7 +89,8 @@ def printer(board)
     p v
   end
 end
-printer(game_board)
+# printer(game_board)
+player_one.diagonal_checker(game_board)
 
 i = 0
 while i < 9
@@ -77,6 +98,7 @@ while i < 9
   player_one.choice(gets.chomp.to_s, game_board)
   player_one.row_checker(game_board)
   player_one.column_checker(game_board)
+  player_one.diagonal_checker(game_board)
   break if player_one.winner == true
 
   i += 1
@@ -85,6 +107,7 @@ while i < 9
   player_two.choice(gets.chomp.to_s, game_board)
   player_two.row_checker(game_board)
   player_two.column_checker(game_board)
+  player_two.diagonal_checker(game_board)
   break if player_two.winner == true
 
   i += 1
