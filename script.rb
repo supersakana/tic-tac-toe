@@ -12,6 +12,7 @@ class Game
     puts "Welcome #{@first_player} and #{@second_player}"
     @board = ('1'..'9').to_a
     @round = 0
+    @winner = false
   end
 
   #   Prints board
@@ -38,13 +39,18 @@ class Game
     @board[choice - 1] = @round.even? ? 'O' : 'X'
     print_board
   end
+
+  def lets_play
+    while @winner == false
+      player1_message
+      move_maker(gets.chomp.to_i)
+
+      player2_message
+      move_maker(gets.chomp.to_i)
+    end
+  end
 end
 
 new_game = Game.new
 new_game.print_board
-
-new_game.player1_message
-new_game.move_maker(gets.chomp.to_i)
-
-new_game.player2_message
-new_game.move_maker(gets.chomp.to_i)
+new_game.lets_play
