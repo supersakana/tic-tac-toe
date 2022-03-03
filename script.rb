@@ -1,11 +1,17 @@
 # This file is going to be the refactored version of the original
 # Game methods
 class Game
-  attr_reader :game_board
+  attr_reader :game_board, :round
 
   # Game intro
   def initialize
+    puts 'Player 1, what is your name?'
+    @first_player = gets.chomp
+    puts 'Player 2, what is your name?'
+    @second_player = gets.chomp
+    puts "Welcome #{@first_player} and #{@second_player}"
     @board = ('1'..'9').to_a
+    @round = 0
   end
 
   #   Prints board
@@ -16,24 +22,29 @@ class Game
     p '--+---+--'
     p "#{@board[6]} | #{@board[7]} | #{@board[8]}"
   end
-end
 
-# When each Player is created
-class Player < Game
-  attr_reader @@player_count
+  #   Prompt for Player 1/2 to make move
+  def player1_message
+    puts "#{@first_player}, make your move..."
+  end
 
-  def initialize(move)
-    super
-    p 'What is your name?'
-    @name = gets.chomp
-    @move = move
-    @winner = false
-    @tie = false
-    @@player_count += 1
+  def player2_message
+    puts "#{@second_player}, make your move..."
+  end
+
+  #   User input prompt
+  def move_maker(choice)
+    @round += 1
+    @board[choice - 1] = @round.even? ? 'O' : 'X'
+    print_board
   end
 end
 
 new_game = Game.new
-# new_game.print_board
+new_game.print_board
+
 new_game.player1_message
+new_game.move_maker(gets.chomp.to_i)
+
 new_game.player2_message
+new_game.move_maker(gets.chomp.to_i)
