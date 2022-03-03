@@ -9,11 +9,15 @@ class Game
     puts 'Player 2, what is your name?'
     @second_player = gets.chomp
     puts "Welcome #{@first_player} and #{@second_player}"
-    @game_board = ('1'..'9').to_a
+    @board = ('1'..'9').to_a
   end
 
   def print_board
-    p game_board
+    p "#{@board[0]} | #{@board[1]} | #{@board[2]}"
+    p '--+---+--'
+    p "#{@board[3]} | #{@board[4]} | #{@board[5]}"
+    p '--+---+--'
+    p "#{@board[6]} | #{@board[7]} | #{@board[8]}"
   end
 end
 
