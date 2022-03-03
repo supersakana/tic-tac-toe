@@ -1,17 +1,14 @@
 # This file is going to be the refactored version of the original
 # Game methods
 class Game
-  attr_accessor :game_board
+  attr_reader :game_board
 
+  # Game intro
   def initialize
-    puts 'Player 1, what is your name?'
-    @first_player = gets.chomp
-    puts 'Player 2, what is your name?'
-    @second_player = gets.chomp
-    puts "Welcome #{@first_player} and #{@second_player}"
     @board = ('1'..'9').to_a
   end
 
+  #   Prints board
   def print_board
     p "#{@board[0]} | #{@board[1]} | #{@board[2]}"
     p '--+---+--'
@@ -21,5 +18,22 @@ class Game
   end
 end
 
+# When each Player is created
+class Player < Game
+  attr_reader @@player_count
+
+  def initialize(move)
+    super
+    p 'What is your name?'
+    @name = gets.chomp
+    @move = move
+    @winner = false
+    @tie = false
+    @@player_count += 1
+  end
+end
+
 new_game = Game.new
-new_game.print_board
+# new_game.print_board
+new_game.player1_message
+new_game.player2_message
