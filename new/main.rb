@@ -3,6 +3,7 @@
 require_relative 'play'
 
 puts <<~HEREDOC
+
   Welcome to Tic-Tac-Toe!
 
   This is a 2 player game.

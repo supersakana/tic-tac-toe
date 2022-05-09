@@ -6,7 +6,12 @@ module Display
     puts 'Welcome to Tic-Tac_Toe'
   end
 
-  def player_name(count)
-    puts "Player #{count} , what is your name?"
+  def display_name(num)
+    puts "Player #{num} , what is your name?"
+    gets.chomp
+  end
+
+  def display_welcome(name, move)
+    puts "Welcome #{name}, your move is #{move}"
   end
 end
