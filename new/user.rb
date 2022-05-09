@@ -4,6 +4,8 @@ require_relative 'display'
 
 # when a new player is created
 class User
+  attr_accessor :name
+
   include Display
 
   def initialize(name, move)

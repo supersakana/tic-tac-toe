@@ -14,20 +14,46 @@ class Play
     @player_one = nil
     @player_two = nil
     @board = Board.new
+    @round = 1
   end
 
+  # driver script
   def lets_play
     intro
-    @board.print_board
+    game_loop
   end
 
+  # creates first and second player
   def intro
-    # creates first player
     name = display_name(1)
     @player_one = User.new(name, 'X')
 
-    # creates second player
     name = display_name(2)
     @player_two = User.new(name, 'O')
+  end
+
+  # prints updated board and
+  def game_loop
+    @board.print_board
+    move_maker until @round == 5
+    # move_maker until @player_one.winner? || @player_two.winner?
+  end
+
+  def move_maker
+    player = @round.odd? ? @player_one : @player_two
+    display_prompt(player.name)
+    move = gets.chomp
+    verify_move(move)
+  end
+
+  # tbc
+  def verify_move(move)
+    if (1..9).include?(move.to_i)
+      p 'valid'
+      @round += 1
+    else
+      p 'invalid'
+      move_maker
+    end
   end
 end

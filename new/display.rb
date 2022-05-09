@@ -14,4 +14,8 @@ module Display
   def display_welcome(name, move)
     puts "Welcome #{name}, your move is #{move}"
   end
+
+  def display_prompt(name)
+    puts "#{name}, make your move..."
+  end
 end
