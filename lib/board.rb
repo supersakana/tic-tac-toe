@@ -2,7 +2,7 @@
 
 # contains board functionality
 class Board
-  attr_accessor :wins, :cells
+  attr_accessor :cells
 
   def initialize
     @cells = (1..9).to_a
