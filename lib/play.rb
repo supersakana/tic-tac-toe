@@ -54,6 +54,7 @@ class Play
   def verify_move(num, player)
     if @board.cells.include?(num.to_i)
       update(num, player)
+      display_win(player.name) if player.winner?
     else
       display_invalid
       move_maker
