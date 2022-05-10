@@ -10,11 +10,13 @@ require_relative 'board'
 class Play
   include Display
 
+  attr_reader :board
+
   def initialize
     @player_one = nil
     @player_two = nil
-    @board = Board.new
     @round = 1
+    @board = Board.new
   end
 
   # driver script
@@ -34,26 +36,37 @@ class Play
 
   # prints updated board and
   def game_loop
-    @board.print_board
-    move_maker until @round == 5
     # move_maker until @player_one.winner? || @player_two.winner?
+    until @round == 10
+      @board.print_board
+      p @player_one.history
+      p @player_two.history
+      move_maker
+    end
   end
 
+  # prompt for player to input move then verifies
   def move_maker
     player = @round.odd? ? @player_one : @player_two
     display_prompt(player.name)
-    move = gets.chomp
-    verify_move(move)
+    num = gets.chomp
+    verify_move(num, player)
   end
 
-  # tbc
-  def verify_move(move)
-    if (1..9).include?(move.to_i)
-      p 'valid'
+  # checks if move is valid then updates data
+  def verify_move(num, player)
+    if (1..9).include?(num.to_i)
+      update(num, player)
       @round += 1
     else
-      p 'invalid'
+      p 'Invalid move'
       move_maker
     end
+  end
+
+  # updates board and user history
+  def update(num, player)
+    @board.update_board(num, player.move)
+    player.update_history(num)
   end
 end

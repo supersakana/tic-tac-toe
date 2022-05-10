@@ -2,18 +2,20 @@
 
 require_relative 'play'
 
-puts <<~HEREDOC
+# # puts <<~HEREDOC
 
-  Welcome to Tic-Tac-Toe!
+# #   Welcome to Tic-Tac-Toe!
 
-  This is a 2 player game.
+# #   This is a 2 player game.
 
-  The goal of is to get 3 in a row.
+# #   The goal of is to get 3 in a row.
 
-  (Click ENTER to start!)
+# #   (Click ENTER to start!)
 
-HEREDOC
+# # HEREDOC
 
-gets
+# gets
 game = Play.new
 game.lets_play
+
+# ruby new/main.rb
