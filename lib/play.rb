@@ -29,9 +29,11 @@ class Play
   def intro
     name = display_name(1)
     @player_one = User.new(name, 'X')
+    display_welcome(@player_one.name, @player_one.move)
 
     name = display_name(2)
     @player_two = User.new(name, 'O')
+    display_welcome(@player_two.name, @player_two.move)
   end
 
   # prints updated board and

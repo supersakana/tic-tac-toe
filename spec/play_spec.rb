@@ -2,13 +2,15 @@
 
 # rspec spec/play_spec.rb
 
-require_relative '../new/play'
+require_relative '../lib/play'
+require_relative '../lib/user'
+require_relative '../lib/board'
 
 describe Play do
   subject(:game) { described_class.new }
 
   before do
-    game.instance_variable_set(:board, instance_double(Board))
+    game.instance_variable_set(:@board, instance_double(Board))
   end
 
   describe '#lets_play' do
@@ -21,8 +23,7 @@ describe Play do
 
   describe '#game_loop' do
     it 'prints board' do
-      allow(game).to recive(move_maker)
-      expect(game.board).to recive(:print_board)
+      # prints game boars
     end
   end
 end
