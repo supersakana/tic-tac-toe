@@ -36,11 +36,8 @@ class Play
 
   # prints updated board and
   def game_loop
-    # move_maker until @player_one.winner? || @player_two.winner?
-    until @round == 10
+    until @player_one.winner? || @player_two.winner?
       @board.print_board
-      p @player_one.history
-      p @player_two.history
       move_maker
     end
   end
@@ -55,11 +52,10 @@ class Play
 
   # checks if move is valid then updates data
   def verify_move(num, player)
-    if (1..9).include?(num.to_i)
+    if @board.cells.include?(num.to_i)
       update(num, player)
-      @round += 1
     else
-      p 'Invalid move'
+      display_invalid
       move_maker
     end
   end
@@ -68,5 +64,6 @@ class Play
   def update(num, player)
     @board.update_board(num, player.move)
     player.update_history(num)
+    @round += 1
   end
 end

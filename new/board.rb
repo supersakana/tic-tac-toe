@@ -2,13 +2,10 @@
 
 # contains board functionality
 class Board
+  attr_accessor :wins, :cells
+
   def initialize
     @cells = (1..9).to_a
-    @wins = [
-      [1, 2, 3], [4, 5, 6], [7, 8, 9],
-      [1, 4, 7], [2, 5, 8], [3, 6, 9],
-      [1, 5, 9], [7, 5, 3]
-    ]
   end
 
   def print_board

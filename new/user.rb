@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'display'
+require_relative 'board'
 
 # when a new player is created
 class User
@@ -13,6 +14,11 @@ class User
     @move = move
     @history = []
     display_welcome(name, move)
+    @wins = [
+      [1, 2, 3], [4, 5, 6], [7, 8, 9],
+      [1, 4, 7], [2, 5, 8], [3, 6, 9],
+      [1, 5, 9], [7, 5, 3]
+    ]
   end
 
   # adds moves to history
@@ -21,4 +27,9 @@ class User
   end
 
   # checks if player has any winning combos
+  def winner?
+    @wins.any? do |combo|
+      combo.all? { |x| @history.include?(x) }
+    end
+  end
 end
