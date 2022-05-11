@@ -31,6 +31,7 @@ class Play
     @player_two = create_user(2, 'O')
   end
 
+  # creates a new user (private)
   def create_user(num, sym)
     name = display_name(num)
     User.new(name, sym)

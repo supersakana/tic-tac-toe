@@ -8,6 +8,7 @@ class Board
     @cells = (1..9).to_a
   end
 
+  # prints formatted game board
   def print_board
     p "#{@cells[0]} | #{@cells[1]} | #{@cells[2]}"
     p '--+---+--'
