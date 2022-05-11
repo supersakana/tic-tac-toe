@@ -27,13 +27,13 @@ class Play
 
   # creates first and second player
   def intro
-    name = display_name(1)
-    @player_one = User.new(name, 'X')
-    display_welcome(@player_one.name, @player_one.move)
+    @player_one = create_user(1, 'X')
+    @player_two = create_user(2, 'O')
+  end
 
-    name = display_name(2)
-    @player_two = User.new(name, 'O')
-    display_welcome(@player_two.name, @player_two.move)
+  def create_user(num, sym)
+    name = display_name(num)
+    User.new(name, sym)
   end
 
   # prints updated board and

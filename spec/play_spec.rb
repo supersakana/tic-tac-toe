@@ -13,17 +13,17 @@ describe Play do
     game.instance_variable_set(:@board, instance_double(Board))
   end
 
-  describe '#lets_play' do
-    # contains only game methods
-  end
-
-  describe '#intro' do
-    # creates first and second player
+  describe '#create_user' do
+    it 'creates a new player with given number and symbol' do
+      name = 'Zac'
+      symbol = 'X'
+      allow(game).to receive(:display_name).and_return('Zac')
+      expect(User).to receive(:new).with(name, symbol)
+      game.create_user(1, symbol)
+    end
   end
 
   describe '#game_loop' do
-    it 'prints board' do
-      # prints game boars
-    end
+    # code to run
   end
 end
