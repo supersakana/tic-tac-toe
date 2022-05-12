@@ -2,6 +2,7 @@
 
 # rspec spec/play_spec.rb
 
+require 'pry-byebug'
 require_relative '../lib/play'
 require_relative '../lib/user'
 require_relative '../lib/board'
@@ -10,7 +11,7 @@ describe Play do
   subject(:game) { described_class.new }
 
   before do
-    game.instance_variable_set(:@board, instance_double(Board))
+    game.instance_variable_get(:@board)
   end
 
   describe '#game_loop' do
@@ -18,7 +19,7 @@ describe Play do
     let(:player_two) { instance_double(User) }
 
     before do
-      allow(player_one).to receive(:winner?).and_return(false)
+      allow(player_one).to receive(:winner?).and_return(false, true)
       allow(player_two).to receive(:winner?).and_return(false)
       allow(game).to receive(:move_maker)
     end

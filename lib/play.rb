@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # ruby new/main.rb
-
+require 'pry-byebug'
 require_relative 'display'
 require_relative 'user'
 require_relative 'board'
