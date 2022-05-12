@@ -12,29 +12,16 @@ class Play
 
   attr_reader :board
 
-  def initialize
-    @player_one = nil
-    @player_two = nil
+  def initialize(player_one = User.new('User 1', 'X'), player_two = User.new('User 2', 'O'))
+    @player_one = player_one
+    @player_two = player_two
     @round = 1
     @board = Board.new
   end
 
   # driver script
   def lets_play
-    intro
     game_loop
-  end
-
-  # creates first and second player
-  def intro
-    @player_one = create_user(1, 'X')
-    @player_two = create_user(2, 'O')
-  end
-
-  # creates a new user (private)
-  def create_user(num, sym)
-    name = display_name(num)
-    User.new(name, sym)
   end
 
   # prints updated board and

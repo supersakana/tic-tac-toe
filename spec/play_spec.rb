@@ -13,24 +13,18 @@ describe Play do
     game.instance_variable_set(:@board, instance_double(Board))
   end
 
-  describe '#intro' do
-    it 'creates 2 players' do
-      expect(game).to receive(:create_user).twice
-      game.intro
-    end
-  end
-
   describe '#game_loop' do
+    let(:player_one) { instance_double(User) }
+    let(:player_two) { instance_double(User) }
+
     before do
-      game.instance_variable_set(:@player_one, instance_double(User))
-      game.instance_variable_set(:@player_two, instance_double(User))
+      allow(player_one).to receive(:winner?).and_return(false)
+      allow(player_two).to receive(:winner?).and_return(false)
+      allow(game).to receive(:move_maker)
     end
 
     it 'prints the game board' do
-      allow(@player_one).to receive(:winner?).and_return(false)
-      allow(@player_two).to receive(:winner?).and_return(false)
-      allow(game).to receive(:move_maker)
-      expect(game.board).to receive(:print_board)
+      expect(game.board).to receive(:print_board).once
       game.game_loop
     end
   end
