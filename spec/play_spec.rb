@@ -10,10 +10,9 @@ require_relative '../lib/user'
 require_relative '../lib/board'
 
 describe Play do
-  let(:player_one) { instance_double(User) }
-  let(:player_two) { instance_double(User) }
+  let(:player_one) { instance_double(User, name: 'Zac') }
+  let(:player_two) { instance_double(User, name: 'Zoe') }
   subject(:game) { described_class.new(player_one, player_two) }
-
   describe '#game_loop' do
     context 'when loop runs' do
       before do
@@ -43,9 +42,39 @@ describe Play do
   end
 
   describe '#verify_move' do
-    # does it display the correcet winner?
-    # does it accept valid names?
-    # does it reject invalid names?
+    context 'when valid move is passed' do
+      before do
+        allow(player_one).to receive(:winner?).and_return(false)
+      end
+      it 'updates the player history and board' do
+        num = 7
+        expect(game).to receive(:update).once
+        game.verify_move(num, player_one)
+      end
+    end
+    context 'when a valid move is passed through and player wins' do
+      before do
+        allow(player_one).to receive(:winner?).and_return(true)
+        allow(game).to receive(:update)
+      end
+      it 'displays the correct winner message' do
+        num = 3
+        win_message = "Congrats Zac! You're the winner"
+        expect(game).to receive(:display_win).and_return(win_message)
+        game.verify_move(num, player_one)
+      end
+    end
+    context 'when an invalid move passes through' do
+      before do
+        allow(player_one).to receive(:winner?).and_return(false)
+        allow(game).to receive(:move_maker)
+      end
+      it 'displays an error message' do
+        invalid_num = 10
+        expect(game).to receive(:display_invalid).once
+        game.verify_move(invalid_num, player_one)
+      end
+    end
   end
 
   describe '#update' do
